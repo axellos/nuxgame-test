@@ -6,15 +6,11 @@ namespace Tests\Unit;
 
 use App\Models\GameLink;
 use App\Models\GameRecord;
-use App\Models\User;
 use App\Services\Game\GameService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GameServiceTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_play_creates_game_record(): void
     {
         $link = GameLink::factory()->create();

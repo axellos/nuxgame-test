@@ -16,7 +16,7 @@ class GameLinkFactory extends Factory
         return [
             'user_id' => User::factory(),
             'token' => Str::uuid(),
-            'active' => true,
+            'is_active' => true,
             'expires_at' => $this->faker->dateTimeBetween('+1 days', '+7 days'),
         ];
     }
@@ -24,7 +24,7 @@ class GameLinkFactory extends Factory
     public function inactive(): static
     {
         return $this->state(fn(array $attributes) => [
-            'active' => false,
+            'is_active' => false,
         ]);
     }
 

@@ -24,12 +24,12 @@ class GameLinkService implements GameLinkServiceInterface
         return $user->gameLinks()->create([
             'token' => $this->linkTokenGenerator->generate(),
             'expires_at' => now()->addDays(7),
-            'active' => true,
+            'is_active' => true,
         ]);
     }
 
     public function deactivate(GameLink $link): void
     {
-        $link->update(['active' => false]);
+        $link->update(['is_active' => false]);
     }
 }

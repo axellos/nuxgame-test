@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use App\Models\GameLink;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class VerifyGameLinkTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_redirects_if_link_not_found(): void
     {
         $response = $this->get("/games/invalid-token");

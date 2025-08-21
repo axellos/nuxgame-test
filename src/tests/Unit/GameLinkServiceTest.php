@@ -8,13 +8,10 @@ use App\Models\GameLink;
 use App\Models\User;
 use App\Services\GameLink\GameLinkService;
 use App\Services\GameLink\LinkTokenGenerator;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class GameLinkServiceTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_it_generates_new_link_for_user(): void
     {
         $user = User::factory()->create();
@@ -23,7 +20,7 @@ class GameLinkServiceTest extends TestCase
         $link = $service->generate($user);
 
         $this->assertInstanceOf(GameLink::class, $link);
-        $this->assertTrue($link->active);
+        $this->assertTrue($link->is_active);
         $this->assertNotEmpty($link->token);
         $this->assertEquals($user->id, $link->user_id);
     }
@@ -45,7 +42,7 @@ class GameLinkServiceTest extends TestCase
         $service = new GameLinkService(new LinkTokenGenerator());
         $link = $service->generate($user);
 
-        $link->update(['active' => false]);
-        $this->assertFalse($link->refresh()->active);
+        $link->update(['is_active' => false]);
+        $this->assertFalse($link->refresh()->is_active);
     }
 }

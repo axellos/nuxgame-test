@@ -18,11 +18,11 @@ class GameLink extends Model
     protected $fillable = [
         'token',
         'expires_at',
-        'active',
+        'is_active',
     ];
 
     protected $casts = [
-        'active' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -38,7 +38,7 @@ class GameLink extends Model
     #[Scope]
     public function active(Builder $query): void
     {
-        $query->where('active', true)
+        $query->where('is_active', true)
             ->where('expires_at', '>', now());
     }
 }
