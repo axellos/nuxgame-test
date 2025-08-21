@@ -6,17 +6,34 @@ namespace App\Services\GameLink;
 
 use App\Models\GameLink;
 use App\Models\User;
+use Illuminate\Cache\CacheManager;
 
-class GameLinkService implements GameLinkServiceInterface
+readonly class GameLinkService implements GameLinkServiceInterface
 {
     public function __construct(
+        private CacheManager $cacheManager,
         private LinkTokenGeneratorInterface $linkTokenGenerator
     ) {}
 
-    public function getLinkForUser(User $user): GameLink
+    public function getLinkByToken(string $token): GameLink
     {
-        return $user->gameLinks()->active()->first()
-            ?? $this->generate($user);
+        $cacheKey = static::getCacheKey($token);
+
+        $cachedLink = $this->cacheManager->get($cacheKey);
+
+        if ($cachedLink) {
+            return $cachedLink;
+        }
+
+        $link = GameLink::query()->where('token', $token)->active()->first()
+            ?? $this->makeFakeLinkForUnknownToken($token);
+
+        $ttlSeconds = now()->diffInSeconds($link->expires_at);
+        $ttlSeconds = max($ttlSeconds, 60);
+
+        $this->cacheManager->put($cacheKey, $link, $ttlSeconds);
+
+        return $link;
     }
 
     public function generate(User $user): GameLink
@@ -31,5 +48,24 @@ class GameLinkService implements GameLinkServiceInterface
     public function deactivate(GameLink $link): void
     {
         $link->update(['is_active' => false]);
+    }
+
+    public function invalidateCache(string $token): void
+    {
+        $this->cacheManager->forget($this->getCacheKey($token));
+    }
+
+    private function makeFakeLinkForUnknownToken(string $token): GameLink
+    {
+        return GameLink::query()->make([
+            'token' => $token,
+            'is_active' => false,
+            'expires_at' => now()->addSeconds(120),
+        ]);
+    }
+
+    private function getCacheKey(string $token): string
+    {
+        return "{$token}:game_link";
     }
 }

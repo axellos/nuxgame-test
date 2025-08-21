@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Models\GameLink;
+use App\Services\GameLink\GameLinkServiceInterface;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +15,9 @@ class VerifyGameLink
     {
         $token = $request->route('token');
 
-        $gameLink = $token
-            ? GameLink::query()->where('token', $token)->active()->first()
-            : null;
+        $gameLink = app(GameLinkServiceInterface::class)->getLinkByToken($token);
 
-        if (! $gameLink) {
+        if (!$gameLink->isValid()) {
             return redirect()->route('register.page');
         }
 

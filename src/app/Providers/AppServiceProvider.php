@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\GameLink;
+use App\Observers\GameLinkObserver;
 use App\Services\Game\GameService;
 use App\Services\Game\GameServiceInterface;
 use App\Services\Game\Rules\IntervalWinRule;
@@ -25,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        GameLink::observe(GameLinkObserver::class);
+
         GameService::registerWinRules(
             IntervalWinRule::make(901, 1000, 0.7),
             IntervalWinRule::make(601, 900, 0.5),

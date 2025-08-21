@@ -18,5 +18,5 @@ Route::prefix('games/{token}')->middleware(['game-link.verify'])->group(function
 
 Route::prefix('game-links/{token}')->middleware(['game-link.verify'])->group(function () {
     Route::post('regenerate', [GameLinkController::class, 'generate'])->name('game-link.generate');
-    Route::delete('', [GameLinkController::class, 'destroy'])->name('game-link.destroy');
+    Route::delete('', [GameLinkController::class, 'deactivate'])->name('game-link.deactivate');
 });

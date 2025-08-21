@@ -22,7 +22,7 @@ class GameLinkController extends Controller
             ->with('newGameLink', route('game.page', ['token' => $newGameLink->token]));
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function deactivate(Request $request): RedirectResponse
     {
         $this->gameLinkService->deactivate($request->input('gameLink'));
 

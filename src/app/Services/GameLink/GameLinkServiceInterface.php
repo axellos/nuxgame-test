@@ -9,9 +9,11 @@ use App\Models\User;
 
 interface GameLinkServiceInterface
 {
-    public function getLinkForUser(User $user): GameLink;
+    public function getLinkByToken(string $token): GameLink;
 
     public function generate(User $user): GameLink;
 
     public function deactivate(GameLink $link): void;
+
+    public function invalidateCache(string $token): void;
 }

@@ -6,7 +6,7 @@ namespace Tests\Unit;
 
 use App\Models\GameLink;
 use App\Models\GameRecord;
-use App\Services\Game\GameService;
+use App\Services\Game\GameServiceInterface;
 use Tests\TestCase;
 
 class GameServiceTest extends TestCase
@@ -14,7 +14,7 @@ class GameServiceTest extends TestCase
     public function test_play_creates_game_record(): void
     {
         $link = GameLink::factory()->create();
-        $service = new GameService();
+        $service = app(GameServiceInterface::class);
 
         $record = $service->play($link);
 

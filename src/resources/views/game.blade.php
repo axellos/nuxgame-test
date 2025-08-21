@@ -31,7 +31,7 @@
         </div>
 
         <div class="button-wrapper">
-            <form action="{{ route('game-link.destroy', $token) }}" method="POST">
+            <form action="{{ route('game-link.deactivate', $token) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit">@lang('game.buttons.deactivate_link')</button>

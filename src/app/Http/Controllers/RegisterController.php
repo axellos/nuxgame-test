@@ -13,7 +13,7 @@ use Illuminate\Http\RedirectResponse;
 class RegisterController extends Controller
 {
     public function __construct(
-        protected GameLinkServiceInterface $gameLinkService
+        private readonly GameLinkServiceInterface $gameLinkService
     ) {}
 
     public function show(): View
@@ -28,7 +28,7 @@ class RegisterController extends Controller
             ['username' => $request->validated('username')],
         );
 
-        $link = $this->gameLinkService->getLinkForUser($user);
+        $link = $this->gameLinkService->generate($user);
 
         return redirect()->route('register.page')
             ->with('gameLink', route('game.page', ['token' => $link->token]));

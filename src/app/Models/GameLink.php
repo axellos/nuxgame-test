@@ -22,6 +22,7 @@ class GameLink extends Model
     ];
 
     protected $casts = [
+        'expires_at' => 'datetime',
         'is_active' => 'boolean',
     ];
 
@@ -40,5 +41,10 @@ class GameLink extends Model
     {
         $query->where('is_active', true)
             ->where('expires_at', '>', now());
+    }
+
+    public function isValid(): bool
+    {
+        return $this->is_active && $this->expires_at->isFuture();
     }
 }
