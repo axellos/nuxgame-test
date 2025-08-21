@@ -15,9 +15,13 @@ class VerifyGameLink
     {
         $token = $request->route('token');
 
+        if (! $token) {
+            return redirect()->route('register.page');
+        }
+
         $gameLink = GameLink::query()->where('token', $token)->active()->first();
 
-        if (! $token) {
+        if (! $gameLink) {
             return redirect()->route('register.page');
         }
 
