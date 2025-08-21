@@ -16,7 +16,7 @@ Route::prefix('games/{token}')->middleware(['game-link.verify'])->group(function
     Route::get('history', [GameController::class, 'history'])->name('game.history');
 });
 
-Route::prefix('game-links')->middleware(['game-link.verify'])->group(function () {
-    Route::post('/', [GameLinkController::class, 'generate'])->name('game-link.generate');
-    Route::delete('{token}', [GameLinkController::class, 'destroy'])->name('game-link.destroy');
+Route::prefix('game-links/{token}')->middleware(['game-link.verify'])->group(function () {
+    Route::post('regenerate', [GameLinkController::class, 'generate'])->name('game-link.generate');
+    Route::delete('', [GameLinkController::class, 'destroy'])->name('game-link.destroy');
 });

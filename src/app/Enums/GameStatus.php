@@ -11,6 +11,6 @@ enum GameStatus: string
 
     public function label(): string
     {
-        return __("game.status.{$this->value}");
+        return __('enums.'.self::class.'.'.$this->value);
     }
 }

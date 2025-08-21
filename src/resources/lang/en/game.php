@@ -22,9 +22,4 @@ return [
         'title' => 'History',
         'no_results' => 'No results yet.',
     ],
-
-    'status' => [
-        'win' => 'Win',
-        'lose' => 'Lose',
-    ],
 ];

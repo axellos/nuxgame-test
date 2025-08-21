@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{{ session('gameLink') ? __('registration.link.title') : __('registration.title') }}</title>
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/link-box.css') }}">
 </head>
 <body>
 <div class="container">
@@ -12,11 +13,7 @@
     @endif
 
     @if(session('gameLink'))
-        <div class="link-box">
-            <p><strong>@lang('registration.link.title'):</strong></p>
-            <a href="{{ session('gameLink') }}" target="_blank">{{ session('gameLink') }}</a>
-            <p>@lang('registration.link.description')</p>
-        </div>
+        @include('partials._game_link', ['link' => session('gameLink')])
     @else
     <form method="POST" action="{{ route('register.submit') }}">
         @csrf

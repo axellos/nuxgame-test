@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@lang('game.title')</title>
     <link rel="stylesheet" href="{{ asset('css/game.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/link-box.css') }}">
 </head>
 <body>
 <div class="game-page">
@@ -64,6 +65,10 @@
                 </ul>
             @endif
         </div>
+    @endif
+
+    @if(session('newGameLink'))
+        @include('partials._game_link', ['link' => session('newGameLink')])
     @endif
 </div>
 
