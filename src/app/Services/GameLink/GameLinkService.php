@@ -17,7 +17,7 @@ readonly class GameLinkService implements GameLinkServiceInterface
 
     public function getLinkByToken(string $token): GameLink
     {
-        $cacheKey = static::getCacheKey($token);
+        $cacheKey = $this->getCacheKey($token);
 
         $cachedLink = $this->cacheManager->get($cacheKey);
 
