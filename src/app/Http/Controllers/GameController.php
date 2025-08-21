@@ -18,7 +18,6 @@ class GameController extends Controller
 
     public function show(Request $request): View
     {
-        /** @var GameLink $gameLink */
         $gameLink = $request->input('gameLink');
 
         return view('game', ['user' => $gameLink->user, 'token' => $gameLink->token]);
