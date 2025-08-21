@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Contracts\GameLinkServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class GameLinkController extends Controller
 {
@@ -23,8 +22,10 @@ class GameLinkController extends Controller
             ->with('newGameLink', route('game.page', ['token' => $newGameLink->token]));
     }
 
-    public function destroy(): View
+    public function destroy(Request $request): RedirectResponse
     {
-        //TODO: Add implementation
+        $this->gameLinkService->deactivate($request->input('gameLink'));
+
+        return redirect()->route('register.page');
     }
 }

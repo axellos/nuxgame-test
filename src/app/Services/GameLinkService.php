@@ -29,4 +29,9 @@ class GameLinkService implements GameLinkServiceInterface
             'active' => true,
         ]);
     }
+
+    public function deactivate(GameLink $link): void
+    {
+        $link->update(['active' => false]);
+    }
 }
