@@ -11,6 +11,6 @@ class GameLinkObserver
 {
     public function updated(GameLink $gameLink): void
     {
-       app(GameLinkServiceInterface::class)->invalidateCache($gameLink->token);
+       app(GameLinkServiceInterface::class)->invalidateCache((string) $gameLink->token);
     }
 }
