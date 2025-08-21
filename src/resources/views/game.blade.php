@@ -45,6 +45,26 @@
             <p>@lang('game.result.win_amount'): {{ session('gameResult.win_amount') }}</p>
         </div>
     @endif
+
+    @if(session('gameRecords'))
+        <div class="game-history">
+            <h2>@lang('game.history.title')</h2>
+
+            @if(count(session('gameRecords')) === 0)
+                <p>@lang('game.history.no_results')</p>
+            @else
+                <ul>
+                    @foreach(session('gameRecords') as $record)
+                        <li>
+                            {{ __('game.result.random_number') }}: {{ $record['number'] }},
+                            {{ __('game.result.result') }}: {{ $record['status_label'] }},
+                            {{ __('game.result.win_amount') }}: {{ $record['win_amount'] }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    @endif
 </div>
 
 </body>

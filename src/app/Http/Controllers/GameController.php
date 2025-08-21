@@ -32,8 +32,11 @@ class GameController extends Controller
             ->with('gameResult', $record);
     }
 
-    public function history(Request $request)
+    public function history(Request $request): RedirectResponse
     {
-        //TODO: Add implementation
+        $gameLink = $request->input('gameLink');
+
+        return redirect()->route('game.page', $request->route('token'))
+            ->with('gameRecords', $this->gameService->getLastResults($gameLink));
     }
 }

@@ -8,6 +8,7 @@ use App\Enums\GameStatus;
 use App\Models\GameLink;
 use App\Models\GameRecord;
 use App\Services\Game\Rules\WinRule;
+use Illuminate\Support\Collection;
 
 class GameService implements GameServiceInterface
 {
@@ -30,6 +31,14 @@ class GameService implements GameServiceInterface
             'status' => $isWin ? GameStatus::WIN : GameStatus::LOSE,
             'win_amount' => $winAmount,
         ]);
+    }
+
+    public function getLastResults(GameLink $link, int $limit = 3): Collection
+    {
+        return $link->gameRecords()
+            ->latest()
+            ->take($limit)
+            ->get();
     }
 
     protected function calculateWinAmount(int $number): int

@@ -18,6 +18,11 @@ return [
         'win_amount' => 'Win Amount',
     ],
 
+    'history' => [
+        'title' => 'History',
+        'no_results' => 'No results yet.',
+    ],
+
     'status' => [
         'win' => 'Win',
         'lose' => 'Lose',
