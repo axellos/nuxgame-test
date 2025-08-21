@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\GameLink;
 
-use App\Contracts\GameLinkServiceInterface;
-use App\Contracts\LinkTokenGeneratorInterface;
 use App\Models\GameLink;
 use App\Models\User;
 

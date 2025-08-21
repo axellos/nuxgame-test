@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Services\GameLink;
 
-use App\Contracts\LinkTokenGeneratorInterface;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\UuidInterface;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Contracts\GameLinkServiceInterface;
+use App\Services\GameLink\GameLinkServiceInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 

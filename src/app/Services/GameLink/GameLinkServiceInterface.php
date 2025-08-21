@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Contracts;
+namespace App\Services\GameLink;
 
 use App\Models\GameLink;
 use App\Models\User;

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Contracts\GameLinkServiceInterface;
-use App\Contracts\LinkTokenGeneratorInterface;
 use App\Services\Game\GameService;
 use App\Services\Game\GameServiceInterface;
 use App\Services\Game\Rules\IntervalWinRule;
-use App\Services\GameLinkService;
-use App\Services\LinkTokenGenerator;
+use App\Services\GameLink\GameLinkService;
+use App\Services\GameLink\GameLinkServiceInterface;
+use App\Services\GameLink\LinkTokenGenerator;
+use App\Services\GameLink\LinkTokenGeneratorInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(GameLinkServiceInterface::class, GameLinkService::class);
 
-        $this->app->bind(LinkTokenGeneratorInterface::class, LinkTokenGenerator::class);
-        $this->app->bind(GameServiceInterface::class, GameService::class);
+        $this->app->singleton(LinkTokenGeneratorInterface::class, LinkTokenGenerator::class);
+        $this->app->singleton(GameServiceInterface::class, GameService::class);
     }
 
     public function boot(): void
