@@ -6,6 +6,12 @@
    ```bash
    git clone git@github.com:axellos/nuxgame-test.git
    cd nuxgame-test
+
+⚠️ Make sure the following local ports are free, or change them via docker .env
+  * APP_PORT : **80**
+  * DB_PORT : **3306**
+  * REDIS_PORT : **6379**
+
 2. **Start Docker containers**
     ```bash
    docker compose up -d
