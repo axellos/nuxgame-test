@@ -31,6 +31,6 @@ class RegisterController extends Controller
         $link = $this->gameLinkService->getLinkForUser($user);
 
         return redirect()->route('register.page')
-            ->with('gameLink', route('link.page', ['token' => $link->token]));
+            ->with('gameLink', route('game.page', ['token' => $link->token]));
     }
 }

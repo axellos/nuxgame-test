@@ -8,7 +8,12 @@ use Illuminate\View\View;
 
 class GameLinkController extends Controller
 {
-    public function show(): View
+    public function generate(): View
+    {
+        //TODO: Add implementation
+    }
+
+    public function destroy(): View
     {
         //TODO: Add implementation
     }
