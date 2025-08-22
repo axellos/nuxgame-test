@@ -18,7 +18,7 @@ RUN if [ "$WITH_XDEBUG" = "true" ]; then \
       mkdir -p /usr/src/php/ext/xdebug \
       && curl -fsSL https://pecl.php.net/get/xdebug \
          | tar xvz -C "/usr/src/php/ext/xdebug" --strip 1 \
-      && docker-php-ext-install xdebug ; \
+      && docker-php-ext-install xdebug \
       && cp ./90-xdebug.ini ${PHP_INI_DIR}/conf.d/ ; \
     fi
 
