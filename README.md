@@ -21,7 +21,7 @@
 4. **Initialize the project**
     ```bash
    make init
-5. Done! The project is ready to use.
+5. Done! The project is ready to use. The application will be available at http://localhost
 
 ## Running Tests
 
