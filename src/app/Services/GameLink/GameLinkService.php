@@ -40,7 +40,7 @@ readonly class GameLinkService implements GameLinkServiceInterface
     {
         return $user->gameLinks()->create([
             'token' => $this->linkTokenGenerator->generate(),
-            'expires_at' => now()->addDays(7),
+            'expires_at' => now()->addMinutes(config('game.link_expiration_minutes')),
             'is_active' => true,
         ]);
     }
