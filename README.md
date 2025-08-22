@@ -9,8 +9,8 @@
 
 ⚠️ Make sure the following local ports are free, or change them via docker .env
   * APP_PORT : **80**
-  * DB_PORT : **3306**
-  * REDIS_PORT : **6379**
+  * DB_PORT : **33060**
+  * REDIS_PORT : **63790**
 
 2. **Start Docker containers**
     ```bash
