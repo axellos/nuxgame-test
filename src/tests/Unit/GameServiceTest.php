@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class GameServiceTest extends TestCase
 {
-    public function test_play_creates_game_record(): void
+    public function test_it_creates_game_record(): void
     {
         $link = GameLink::factory()->create();
         $service = app(GameServiceInterface::class);
