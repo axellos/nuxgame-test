@@ -19,6 +19,7 @@ RUN if [ "$WITH_XDEBUG" = "true" ]; then \
       && curl -fsSL https://pecl.php.net/get/xdebug \
          | tar xvz -C "/usr/src/php/ext/xdebug" --strip 1 \
       && docker-php-ext-install xdebug ; \
+      && cp ./90-xdebug.ini ${PHP_INI_DIR}/conf.d/ ; \
     fi
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -28,8 +29,6 @@ RUN addgroup -g ${GID} --system laravel \
     && sed -i "s/user = www-data/user = laravel/g" /usr/local/etc/php-fpm.d/www.conf \
     && sed -i "s/group = www-data/group = laravel/g" /usr/local/etc/php-fpm.d/www.conf \
     && echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
-
-COPY ./90-xdebug.ini ${PHP_INI_DIR}/conf.d/
 
 USER laravel
 
